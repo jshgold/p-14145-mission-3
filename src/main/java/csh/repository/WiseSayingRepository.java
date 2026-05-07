@@ -8,11 +8,15 @@ import java.util.List;
 public class WiseSayingRepository {
     private List<WiseSaying> list = new ArrayList<>();
     public void save(WiseSaying wiseSaying) {
-        list.add(wiseSaying);
+        list.add(0, wiseSaying);
     }
 
     public List<WiseSaying> findAll() {
         return list;
+    }
+
+    public void update(int idx, WiseSaying wiseSaying) {
+        list.set(idx, wiseSaying);
     }
 
 //    public WiseSaying deleteById(int id) {

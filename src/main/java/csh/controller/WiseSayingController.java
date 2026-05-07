@@ -4,6 +4,7 @@ import csh.entity.WiseSaying;
 import csh.service.WiseSayingService;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class WiseSayingController {
@@ -34,5 +35,24 @@ public class WiseSayingController {
         for (WiseSaying wiseSaying : list) {
             System.out.println(wiseSaying.getId() + " / " + wiseSaying.getAuthor() + " / " + wiseSaying.getContent());
         }
+    }
+
+    public void requestUpdate(String input) {
+        int id = Integer.parseInt(input.split("=")[1]);
+        Map<Integer,WiseSaying> map = service.findById(id);
+        if(map == null || map.containsKey(-1)) {
+            System.out.println("%d번 명언은 존재하지않습니다.".formatted(id));
+            return;
+        }
+        int idx = map.keySet().stream().findFirst().get();
+        WiseSaying wiseSaying = map.get(idx);
+        System.out.println("명언(기존) : %s".formatted(wiseSaying.getContent()));
+        System.out.print("명언 : ");
+        String content = sc.nextLine().trim();
+        System.out.println("저자(기존) : %s".formatted(wiseSaying.getAuthor()));
+        System.out.print("저자 : ");
+        String author = sc.nextLine().trim();
+        service.updateByIdx(idx, content, author);
+        System.out.println("%d번 명언이 수정되었습니다.".formatted(id));
     }
 }

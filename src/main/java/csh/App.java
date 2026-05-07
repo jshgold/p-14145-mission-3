@@ -12,14 +12,20 @@ public class App {
         while(true) {
             System.out.print("명령) ");
             String input = sc.nextLine().trim();
-            String a = "";
-            switch (input) {
+            String[] split = input.split("\\?");
+            String command = split[0];
+
+            switch (command) {
                 case "exit" -> {
                     System.out.println("프로그램을 종료합니다.");
                     return;
                 }
                 case "create" -> controller.requestCreate();
                 case "list" -> controller.requestShowList();
+                case "edit" -> {
+                    String s = split[1];
+                    controller.requestUpdate(s);
+                }
             }
         }
     }
