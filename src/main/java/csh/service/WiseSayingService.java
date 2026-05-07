@@ -15,7 +15,7 @@ public class WiseSayingService {
         return wiseSaying.getId();
     }
 
-    public List<WiseSaying> displayWiseSaying() {
+    public List<WiseSaying> getWiseSayingList() {
         return repo.findAll();
     }
 }

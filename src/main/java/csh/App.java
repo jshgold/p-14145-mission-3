@@ -14,11 +14,12 @@ public class App {
             String input = sc.nextLine().trim();
             String a = "";
             switch (input) {
-                case "create" -> controller.requestCreate();
                 case "exit" -> {
                     System.out.println("프로그램을 종료합니다.");
                     return;
                 }
+                case "create" -> controller.requestCreate();
+                case "list" -> controller.requestShowList();
             }
         }
     }
