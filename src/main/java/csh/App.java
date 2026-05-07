@@ -1,0 +1,25 @@
+package csh;
+
+import csh.controller.WiseSayingController;
+
+import java.util.Scanner;
+
+public class App {
+    private final Scanner sc = new Scanner(System.in);
+    private final WiseSayingController controller = new WiseSayingController(sc);
+    public void run() {
+        System.out.println("== 명언 앱 ==");
+        while(true) {
+            System.out.print("명령) ");
+            String input = sc.nextLine().trim();
+            String a = "";
+            switch (input) {
+                case "create" -> controller.requestCreate();
+                case "exit" -> {
+                    System.out.println("프로그램을 종료합니다.");
+                    return;
+                }
+            }
+        }
+    }
+}
