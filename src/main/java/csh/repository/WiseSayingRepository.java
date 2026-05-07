@@ -19,7 +19,7 @@ public class WiseSayingRepository {
         list.set(idx, wiseSaying);
     }
 
-//    public WiseSaying deleteById(int id) {
-//
-//    }
+    public void delete(int idx) {
+        WiseSaying ws = list.remove(idx);
+    }
 }

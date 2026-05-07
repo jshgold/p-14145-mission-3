@@ -20,20 +20,13 @@ public class WiseSayingService {
     }
 
     public List<WiseSaying> getWiseSayingList() {
-        List<WiseSaying> a = repo.findAll();
         return repo.findAll();
     }
 
-    public Map<Integer,WiseSaying> findById(int targetId) {
+    public Map<Integer,WiseSaying> findByIdForUpdate(int targetId) {
         Map<Integer,WiseSaying> map = new HashMap<>();
         List<WiseSaying> list = repo.findAll();
-        if(list.isEmpty()) return null;
-
-        int idx = IntStream
-                .range(0, list.size())
-                .filter(i -> list.get(i).getId() == targetId)
-                .findFirst().orElse(-1);
-
+        int idx = findIdxById(list, targetId);
         if(idx == -1) return null;
         WiseSaying ws = list.get(idx);
         map.put(idx,ws);
@@ -46,5 +39,22 @@ public class WiseSayingService {
         ws.setContent(content);
         ws.setAuthor(author);
         repo.update(idx, ws);
+    }
+
+    public boolean deleteById(int id) {
+        List<WiseSaying> list = repo.findAll();
+        int idx = findIdxById(list, id);
+        if(idx == -1) return false;
+        repo.delete(idx);
+        return true;
+    }
+
+    private int findIdxById(List<WiseSaying> list, int targetId) {
+        if(list.isEmpty()) return -1;
+        int idx = IntStream
+                .range(0, list.size())
+                .filter(i -> list.get(i).getId() == targetId)
+                .findFirst().orElse(-1);
+        return idx;
     }
 }

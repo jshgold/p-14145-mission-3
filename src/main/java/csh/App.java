@@ -26,6 +26,10 @@ public class App {
                     String s = split[1];
                     controller.requestUpdate(s);
                 }
+                case "delete" -> {
+                    String s = split[1];
+                    controller.requestDelete(s);
+                }
             }
         }
     }

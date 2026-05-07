@@ -39,7 +39,7 @@ public class WiseSayingController {
 
     public void requestUpdate(String input) {
         int id = Integer.parseInt(input.split("=")[1]);
-        Map<Integer,WiseSaying> map = service.findById(id);
+        Map<Integer,WiseSaying> map = service.findByIdForUpdate(id);
         if(map == null || map.containsKey(-1)) {
             System.out.println("%d번 명언은 존재하지않습니다.".formatted(id));
             return;
@@ -54,5 +54,12 @@ public class WiseSayingController {
         String author = sc.nextLine().trim();
         service.updateByIdx(idx, content, author);
         System.out.println("%d번 명언이 수정되었습니다.".formatted(id));
+    }
+
+    public void requestDelete(String input) {
+        int id = Integer.parseInt(input.split("=")[1]);
+        boolean flag = service.deleteById(id);
+        if(flag) System.out.println("%d번 명언이 삭제되었습니다.".formatted(id));
+        else System.out.println("%d번 명언은 존재하지않습니다.".formatted(id));
     }
 }
