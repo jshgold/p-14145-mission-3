@@ -9,9 +9,12 @@ public class Rq {
     public Rq(String input) {
         map = new HashMap<>();
         String[] adf = input.split("\\?");
-        String actionName = adf[0];
+        String actionName = adf.length > 0 ? adf[0] : "";
         String param = adf.length > 1 ? adf[1] : "";
         map.put("actionName", actionName);
+
+        if("".equals(param)) return;
+
         String[] bbb = param.split("&");
         for (String s : bbb) {
             String[] kv = s.split("=");
@@ -24,7 +27,7 @@ public class Rq {
 
     public String getValue(String key, String defaultValue) {
         String v = map.get(key);
-        return v == null ? defaultValue : v;
+        return v == null || v == "" ? defaultValue : v;
     }
 
     public int getIntValue(String key, int defaultValue) {

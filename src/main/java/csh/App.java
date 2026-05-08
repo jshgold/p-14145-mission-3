@@ -12,8 +12,9 @@ public class App {
         while(true) {
             System.out.print("명령) ");
             String input = sc.nextLine().trim();
-            String[] split = input.split("\\?");
-            String command = split[0];
+            Rq rq = new Rq(input);
+            String command = rq.getValue("actionName","잘못된 입력입니다 다시 입력하세요");
+            System.out.println(command);
 
             switch (command) {
                 case "exit" -> {
@@ -23,12 +24,12 @@ public class App {
                 case "create" -> controller.requestCreate();
                 case "list" -> controller.requestShowList();
                 case "edit" -> {
-                    String s = split[1];
-                    controller.requestUpdate(s);
+                    int id = rq.getIntValue("id",-1);
+                    controller.requestUpdate(id);
                 }
                 case "delete" -> {
-                    String s = split[1];
-                    controller.requestDelete(s);
+                    int id = rq.getIntValue("id",-1);
+                    controller.requestDelete(id);
                 }
             }
         }
