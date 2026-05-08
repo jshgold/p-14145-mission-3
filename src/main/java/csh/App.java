@@ -14,7 +14,6 @@ public class App {
             String input = sc.nextLine().trim();
             Rq rq = new Rq(input);
             String command = rq.getValue("actionName","잘못된 입력입니다 다시 입력하세요");
-            System.out.println(command);
 
             switch (command) {
                 case "exit" -> {
