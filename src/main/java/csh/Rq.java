@@ -20,7 +20,7 @@ public class Rq {
             String[] kv = s.split("=");
             String val = kv.length > 1 ? kv[1] : "";
             if(val == "") continue;
-            String key = kv[0];
+            String key = kv[0].toLowerCase();
             map.put(key, val);
         }
     }
